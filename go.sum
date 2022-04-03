@@ -1,0 +1,4 @@
+github.com/Periyot/BodyParser v0.0.0-20220222112731-824caa91268d h1:4wY3a5Z9azyp4SvGEJ8QR58nd41zICnJOsBoc96S7FY=
+github.com/Periyot/BodyParser v0.0.0-20220222112731-824caa91268d/go.mod h1:M0WNCF19ljtYUpxGOLbij0L5koQluf5UjY4ujmCisgk=
+github.com/mattn/go-sqlite3 v1.14.12 h1:TJ1bhYJPV44phC+IMu1u2K/i5RriLTPe+yc68XDJ1Z0=
+github.com/mattn/go-sqlite3 v1.14.12/go.mod h1:NyWgC/yNuGj7Q9rpYnZvas74GogHl5/Z4A/KQRfk6bU=
