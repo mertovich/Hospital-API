@@ -90,3 +90,20 @@ func Login(Doctor_TC_NO int, Doctor_Password string) (Doctor, string) {
 	defer db.Close()
 	return d, loginControl
 }
+
+func UpdatePassword(doctorNewPassword string, doctorTcNo int) {
+	db, err := sql.Open("sqlite3", "./database.db")
+	if err != nil {
+		defer db.Close()
+	}
+
+	sqlStmt := `
+	CREATE TABLE IF NOT EXISTS  doctors(Doctor_TC_NO integer not null primary key, Doctor_Password text, Doctor_Name text, Doctor_Last_Name text, Doctor_Age integer, Doctor_Gender text, Doctor_Hes_Code text, Doctor_Phone_Number integer,Doctor_Mail text, Doctor_Expertise text);
+	`
+	db.Exec(sqlStmt)
+
+	tx, _ := db.Begin()
+	smtm, _ := tx.Prepare("UPDATE doctors SET Doctor_Password = ? WHERE Doctor_TC_NO = ?")
+	smtm.Exec(doctorNewPassword, doctorTcNo)
+	tx.Commit()
+}
