@@ -12,6 +12,7 @@ func main() {
 	// doktor kayıt
 	http.HandleFunc(`/doctor/register`, Doctor.DoctorRegisterHandler)
 	http.HandleFunc(`/doctor/login`, Doctor.DoctorLoginHandler)
+	http.HandleFunc(`/doctor/update/password`, Doctor.DoctorUpdateHandler)
 
 	port := os.Getenv("PORT")
 	if port == "" {
