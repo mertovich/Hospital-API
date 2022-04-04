@@ -42,3 +42,10 @@ $ go run hospital_api.go
 - Doctor_Password
 
 > Returns Doctor information if login is successful, returns an error message if login is unsuccessful
+
+#####  POST `/doctor/update/password`
+
+###### Body
+
+- Doctor_TC_NO
+- Doctor_New_Password
