@@ -56,3 +56,10 @@ $ go run hospital_api.go
 
 - Doctor_TC_NO
 - Doctor_New_Name
+
+#####  POST `/doctor/update/lastname`
+
+###### Body
+
+- Doctor_TC_NO
+- Doctor_New_Last_Name
