@@ -49,3 +49,10 @@ $ go run hospital_api.go
 
 - Doctor_TC_NO
 - Doctor_New_Password
+
+#####  POST `/doctor/update/name`
+
+###### Body
+
+- Doctor_TC_NO
+- Doctor_New_Name
