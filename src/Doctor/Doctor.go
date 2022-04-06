@@ -185,3 +185,28 @@ func DoctorUpdateAgeHandler(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 	}
 }
+
+func DoctorUpdateGenderHandler(w http.ResponseWriter, r *http.Request) {
+	// Fatal Access-Control-Allow-Origin
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+
+	if r.URL.Path != "/doctor/update/gender" {
+		http.NotFound(w, r)
+		return
+	}
+	bodyByte, _ := ioutil.ReadAll(r.Body)
+	bodyString := string(bodyByte)
+
+	maps := BodyParser.Parser(bodyString)
+
+	doctorTcNo := maps[`Doctor_TC_NO`]
+	doctorNewGender := maps[`Doctor_New_Gender`]
+	doctorTcNoInt, _ := strconv.Atoi(doctorTcNo)
+
+	DataManagerDoctor.UpdateGender(doctorNewGender, doctorTcNoInt)
+	_, errors := fmt.Fprint(w, `success`)
+	if errors != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+	}
+}
