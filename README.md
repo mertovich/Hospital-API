@@ -70,3 +70,10 @@ $ go run hospital_api.go
 
 - Doctor_TC_NO
 - Doctor_New_Age
+
+#####  POST `/doctor/update/gender`
+
+###### Body
+
+- Doctor_TC_NO
+- Doctor_New_Gender
