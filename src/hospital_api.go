@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	// doktor kayıt
+	// doctor
 	http.HandleFunc(`/doctor/register`, Doctor.DoctorRegisterHandler)
 	http.HandleFunc(`/doctor/login`, Doctor.DoctorLoginHandler)
 	http.HandleFunc(`/doctor/update/password`, Doctor.DoctorUpdatePasswordHandler)
@@ -17,7 +17,7 @@ func main() {
 	http.HandleFunc(`/doctor/update/lastname`, Doctor.DoctorUpdateLastNameHandler)
 	http.HandleFunc(`/doctor/update/age`, Doctor.DoctorUpdateAgeHandler)
 	http.HandleFunc(`/doctor/update/gender`, Doctor.DoctorUpdateGenderHandler)
-
+	http.HandleFunc(`/doctor/update/hescode`, Doctor.DoctorUpdateHesCodeHandler)
 
 	port := os.Getenv("PORT")
 	if port == "" {
