@@ -77,3 +77,10 @@ $ go run hospital_api.go
 
 - Doctor_TC_NO
 - Doctor_New_Gender
+
+#####  POST `/doctor/update/hescode`
+
+###### Body
+
+- Doctor_TC_NO
+- Doctor_New_Hes_Code
