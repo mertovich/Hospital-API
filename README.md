@@ -91,3 +91,10 @@ $ go run hospital_api.go
 
 - Doctor_TC_NO
 - Doctor_New_Phone_Number
+
+#####  POST `/doctor/update/mail`
+
+###### Body
+
+- Doctor_TC_NO
+- Doctor_New_Mail
