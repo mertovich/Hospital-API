@@ -261,3 +261,29 @@ func DoctorUpdatePhoneNumberHandler(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 	}
 }
+
+func DoctorUpdateMailHandler(w http.ResponseWriter, r *http.Request) {
+	// Fatal Access-Control-Allow-Origin
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+
+	if r.URL.Path != "/doctor/update/mail" {
+		http.NotFound(w, r)
+		return
+	}
+	bodyByte, _ := ioutil.ReadAll(r.Body)
+	bodyString := string(bodyByte)
+
+	maps := BodyParser.Parser(bodyString)
+
+	doctorTcNo := maps[`Doctor_TC_NO`]
+	doctorNewMail := maps[`Doctor_New_Mail`]
+	doctorNewMail = strings.ReplaceAll(doctorNewMail, `%40`, `@`)
+	doctorTcNoInt, _ := strconv.Atoi(doctorTcNo)
+
+	DataManagerDoctor.UpdateMail(doctorNewMail, doctorTcNoInt)
+	_, errors := fmt.Fprint(w, `success`)
+	if errors != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+	}
+}
