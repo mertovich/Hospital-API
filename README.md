@@ -84,3 +84,10 @@ $ go run hospital_api.go
 
 - Doctor_TC_NO
 - Doctor_New_Hes_Code
+
+#####  POST `/doctor/update/phone`
+
+###### Body
+
+- Doctor_TC_NO
+- Doctor_New_Phone_Number
