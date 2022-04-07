@@ -235,3 +235,29 @@ func DoctorUpdateHesCodeHandler(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 	}
 }
+
+func DoctorUpdatePhoneNumberHandler(w http.ResponseWriter, r *http.Request) {
+	// Fatal Access-Control-Allow-Origin
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+
+	if r.URL.Path != "/doctor/update/phone" {
+		http.NotFound(w, r)
+		return
+	}
+	bodyByte, _ := ioutil.ReadAll(r.Body)
+	bodyString := string(bodyByte)
+
+	maps := BodyParser.Parser(bodyString)
+
+	doctorTcNo := maps[`Doctor_TC_NO`]
+	doctorPhoneNumber := maps[`Doctor_New_Phone_Number`]
+	doctorTcNoInt, _ := strconv.Atoi(doctorTcNo)
+	doctorPhoneNumberInt, _ := strconv.Atoi(doctorPhoneNumber)
+
+	DataManagerDoctor.UpdatePhoneNumber(doctorPhoneNumberInt, doctorTcNoInt)
+	_, errors := fmt.Fprint(w, `success`)
+	if errors != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+	}
+}

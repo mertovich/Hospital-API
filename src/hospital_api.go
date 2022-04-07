@@ -18,6 +18,7 @@ func main() {
 	http.HandleFunc(`/doctor/update/age`, Doctor.DoctorUpdateAgeHandler)
 	http.HandleFunc(`/doctor/update/gender`, Doctor.DoctorUpdateGenderHandler)
 	http.HandleFunc(`/doctor/update/hescode`, Doctor.DoctorUpdateHesCodeHandler)
+	http.HandleFunc(`/doctor/update/phone`, Doctor.DoctorUpdatePhoneNumberHandler)
 
 	port := os.Getenv("PORT")
 	if port == "" {
