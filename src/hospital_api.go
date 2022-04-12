@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"hospital_api/src/Doctor"
+	"hospital_api/src/Patient"
 	"log"
 	"net/http"
 	"os"
@@ -20,6 +21,9 @@ func main() {
 	http.HandleFunc(`/doctor/update/hescode`, Doctor.DoctorUpdateHesCodeHandler)
 	http.HandleFunc(`/doctor/update/phone`, Doctor.DoctorUpdatePhoneNumberHandler)
 	http.HandleFunc(`/doctor/update/mail`, Doctor.DoctorUpdateMailHandler)
+
+	// patient
+	http.HandleFunc(`/patient/register`, Patient.PatientRegisterHandler)
 
 	port := os.Getenv("PORT")
 	if port == "" {
