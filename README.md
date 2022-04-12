@@ -98,3 +98,20 @@ $ go run hospital_api.go
 
 - Doctor_TC_NO
 - Doctor_New_Mail
+
+### Patient
+
+#####  POST `/patient/register`
+
+###### Body
+
+- Patient_TC_NO
+- Patient_Name
+- Patient_Last_Name
+- Patient_Age
+- Patient_Gender
+- Patient_Hes_Code
+- Patient_Phone_Number
+- Patient_Mail
+
+> Returns Patient information if login is successful, returns an error message if login is unsuccessful
