@@ -50,3 +50,37 @@ func PatientRegisterHandler(w http.ResponseWriter, r *http.Request) {
 
 	}
 }
+
+func PatientInfoHandler(w http.ResponseWriter, r *http.Request) {
+	// Fatal Access-Control-Allow-Origin
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+
+	if r.URL.Path != "/patient/info" {
+		http.NotFound(w, r)
+		return
+	}
+
+	bodyByte, _ := ioutil.ReadAll(r.Body)
+	bodyString := string(bodyByte)
+
+	maps := BodyParser.Parser(bodyString)
+
+	patientTcNo := maps[`Patient_TC_NO`]
+	patientTcNoInt, _ := strconv.Atoi(patientTcNo)
+
+	patient, err := DataManagerPatient.GetPatient(patientTcNoInt)
+	if err != `` {
+		_, errors := fmt.Fprint(w, string(err))
+		if errors != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+		}
+	} else {
+		patientJSON, _ := json.Marshal(patient)
+
+		_, errors := fmt.Fprint(w, string(patientJSON))
+		if errors != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+		}
+	}
+}
