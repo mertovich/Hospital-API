@@ -166,3 +166,57 @@ func PatientAgeUpdateHandler(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 	}
 }
+
+func PatientGenderUpdateHandler(w http.ResponseWriter, r *http.Request) {
+	// Fatal Access-Control-Allow-Origin
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+
+	if r.URL.Path != "/patient/update/gender" {
+		http.NotFound(w, r)
+		return
+	}
+
+	bodyByte, _ := ioutil.ReadAll(r.Body)
+	bodyString := string(bodyByte)
+
+	maps := BodyParser.Parser(bodyString)
+
+	patientTcNo := maps[`Patient_TC_NO`]
+	patientNewGender := maps[`Patient_New_Gender`]
+	patientTcNoInt, _ := strconv.Atoi(patientTcNo)
+
+	DataManagerPatient.UpdateGender(patientNewGender, patientTcNoInt)
+	patientJSON, _ := json.Marshal(``)
+	_, errors := fmt.Fprint(w, string(patientJSON))
+	if errors != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+	}
+}
+
+func PatientHesCodeUpdateHandler(w http.ResponseWriter, r *http.Request) {
+	// Fatal Access-Control-Allow-Origin
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+
+	if r.URL.Path != "/patient/update/hescode" {
+		http.NotFound(w, r)
+		return
+	}
+
+	bodyByte, _ := ioutil.ReadAll(r.Body)
+	bodyString := string(bodyByte)
+
+	maps := BodyParser.Parser(bodyString)
+
+	patientTcNo := maps[`Patient_TC_NO`]
+	patientNewHesCode := maps[`Patient_New_Hes_Code`]
+	patientTcNoInt, _ := strconv.Atoi(patientTcNo)
+
+	DataManagerPatient.UpdateHesCode(patientNewHesCode, patientTcNoInt)
+	patientJSON, _ := json.Marshal(``)
+	_, errors := fmt.Fprint(w, string(patientJSON))
+	if errors != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+	}
+}
