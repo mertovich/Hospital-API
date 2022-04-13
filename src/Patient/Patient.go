@@ -84,3 +84,31 @@ func PatientInfoHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 }
+
+func PatientNameUpdateHandler(w http.ResponseWriter, r *http.Request) {
+	// Fatal Access-Control-Allow-Origin
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+
+	if r.URL.Path != "/patient/update/name" {
+		http.NotFound(w, r)
+		return
+	}
+
+	bodyByte, _ := ioutil.ReadAll(r.Body)
+	bodyString := string(bodyByte)
+
+	maps := BodyParser.Parser(bodyString)
+
+	patientTcNo := maps[`Patient_TC_NO`]
+	patientNewName := maps[`Patient_New_Name`]
+	patientTcNoInt, _ := strconv.Atoi(patientTcNo)
+
+	DataManagerPatient.UpdateName(patientNewName, patientTcNoInt)
+	patientJSON, _ := json.Marshal(``)
+	_, errors := fmt.Fprint(w, string(patientJSON))
+	if errors != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+	}
+
+}

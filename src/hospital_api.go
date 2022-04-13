@@ -25,6 +25,7 @@ func main() {
 	// patient
 	http.HandleFunc(`/patient/register`, Patient.PatientRegisterHandler)
 	http.HandleFunc(`/patient/info`, Patient.PatientInfoHandler)
+	http.HandleFunc(`/patient/update/name`, Patient.PatientNameUpdateHandler)
 
 	port := os.Getenv("PORT")
 	if port == "" {
