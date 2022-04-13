@@ -128,3 +128,10 @@ $ go run hospital_api.go
 
 - Patient_TC_NO
 - Patient_New_Name
+
+#####  POST `/patient/update/lastname`
+
+###### Body
+
+- Patient_TC_NO
+- Patient_New_Last_Name
