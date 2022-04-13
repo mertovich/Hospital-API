@@ -124,3 +124,20 @@ func UpdateLastName(patientNewLastName string, patientTcNo int) {
 	smtm.Exec(patientNewLastName, patientTcNo)
 	tx.Commit()
 }
+
+func UpdateAge(patientAge int, patientTcNo int) {
+	db, err := sql.Open("sqlite3", "./database.db")
+	if err != nil {
+		defer db.Close()
+	}
+
+	sqlStmt := `
+	CREATE TABLE IF NOT EXISTS  patients(Patient_TC_NO integer not null primary key, Patient_Name text, Patient_Last_Name text, Patient_Age integer, Patient_Gender text, Patient_Hes_Code text, Patient_Phone_Number integer,Patient_Mail text);
+	`
+	db.Exec(sqlStmt)
+
+	tx, _ := db.Begin()
+	smtm, _ := tx.Prepare("UPDATE patients SET Patient_Age = ? WHERE Patient_TC_NO = ?")
+	smtm.Exec(patientAge, patientTcNo)
+	tx.Commit()
+}
