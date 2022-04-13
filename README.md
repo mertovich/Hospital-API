@@ -114,4 +114,10 @@ $ go run hospital_api.go
 - Patient_Phone_Number
 - Patient_Mail
 
-> Returns Patient information if login is successful, returns an error message if login is unsuccessful
+#####  POST `/patient/info`
+
+###### Body
+
+- Patient_TC_NO
+
+> Returns Patient info
