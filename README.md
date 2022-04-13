@@ -163,3 +163,10 @@ $ go run hospital_api.go
 
 - Patient_TC_NO
 - Patient_New_Phone_Number
+
+#####  POST `/patient/update/mail`
+
+###### Body
+
+- Patient_TC_NO
+- Patient_New_Mail
