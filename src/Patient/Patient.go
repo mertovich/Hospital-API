@@ -110,5 +110,31 @@ func PatientNameUpdateHandler(w http.ResponseWriter, r *http.Request) {
 	if errors != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 	}
+}
 
+func PatientLastNameUpdateHandler(w http.ResponseWriter, r *http.Request) {
+	// Fatal Access-Control-Allow-Origin
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+
+	if r.URL.Path != "/patient/update/lastname" {
+		http.NotFound(w, r)
+		return
+	}
+
+	bodyByte, _ := ioutil.ReadAll(r.Body)
+	bodyString := string(bodyByte)
+
+	maps := BodyParser.Parser(bodyString)
+
+	patientTcNo := maps[`Patient_TC_NO`]
+	patientNewLastName := maps[`Patient_New_Last_Name`]
+	patientTcNoInt, _ := strconv.Atoi(patientTcNo)
+
+	DataManagerPatient.UpdateLastName(patientNewLastName, patientTcNoInt)
+	patientJSON, _ := json.Marshal(``)
+	_, errors := fmt.Fprint(w, string(patientJSON))
+	if errors != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+	}
 }
