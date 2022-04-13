@@ -47,7 +47,7 @@ func GetPatient(patientTcNo int) (Patient, string) {
 		defer db.Close()
 	}
 	sqlStmt := `
-	CREATE TABLE IF NOT EXISTS  patients(Patient_TC_NO integer not null primary key, Patient_Name text, Patient_Last_Name text, Patient_Age integer, Patient_Gender text, Patient_Hes_Code text, Patient_Phone_Number integer,Patient_Mail text);
+	CREATE TABLE IF NOT EXISTS patients(Patient_TC_NO integer not null primary key, Patient_Name text, Patient_Last_Name text, Patient_Age integer, Patient_Gender text, Patient_Hes_Code text, Patient_Phone_Number integer,Patient_Mail text);
 	`
 	db.Exec(sqlStmt)
 
@@ -91,19 +91,36 @@ func GetPatient(patientTcNo int) (Patient, string) {
 	return p, patientNull
 }
 
-func UpdateName(doctorNewName string, patientTcNo int) {
+func UpdateName(patientNewName string, patientTcNo int) {
 	db, err := sql.Open("sqlite3", "./database.db")
 	if err != nil {
 		defer db.Close()
 	}
 
 	sqlStmt := `
-	CREATE TABLE IF NOT EXISTS  doctors(Doctor_TC_NO integer not null primary key, Doctor_Password text, Doctor_Name text, Doctor_Last_Name text, Doctor_Age integer, Doctor_Gender text, Doctor_Hes_Code text, Doctor_Phone_Number integer,Doctor_Mail text, Doctor_Expertise text);
+	CREATE TABLE IF NOT EXISTS  patients(Patient_TC_NO integer not null primary key, Patient_Name text, Patient_Last_Name text, Patient_Age integer, Patient_Gender text, Patient_Hes_Code text, Patient_Phone_Number integer,Patient_Mail text);
 	`
 	db.Exec(sqlStmt)
 
 	tx, _ := db.Begin()
 	smtm, _ := tx.Prepare("UPDATE patients SET Patient_Name = ? WHERE Patient_TC_NO = ?")
-	smtm.Exec(doctorNewName, patientTcNo)
+	smtm.Exec(patientNewName, patientTcNo)
+	tx.Commit()
+}
+
+func UpdateLastName(patientNewLastName string, patientTcNo int) {
+	db, err := sql.Open("sqlite3", "./database.db")
+	if err != nil {
+		defer db.Close()
+	}
+
+	sqlStmt := `
+	CREATE TABLE IF NOT EXISTS  patients(Patient_TC_NO integer not null primary key, Patient_Name text, Patient_Last_Name text, Patient_Age integer, Patient_Gender text, Patient_Hes_Code text, Patient_Phone_Number integer,Patient_Mail text);
+	`
+	db.Exec(sqlStmt)
+
+	tx, _ := db.Begin()
+	smtm, _ := tx.Prepare("UPDATE patients SET Patient_Last_Name = ? WHERE Patient_TC_NO = ?")
+	smtm.Exec(patientNewLastName, patientTcNo)
 	tx.Commit()
 }
