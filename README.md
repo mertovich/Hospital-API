@@ -142,3 +142,17 @@ $ go run hospital_api.go
 
 - Patient_TC_NO
 - Patient_New_Age
+
+#####  POST `/patient/update/gender`
+
+###### Body
+
+- Patient_TC_NO
+- Patient_New_Gender
+
+#####  POST `/patient/update/hescode`
+
+###### Body
+
+- Patient_TC_NO
+- Patient_New_Hes_Code
